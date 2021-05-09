@@ -1,5 +1,5 @@
 //
-//  IRLEXManagedObjectServerMapingPrivate.swift
+//  ManagedObjectServerMapingPrivate.swift
 //
 //  Created by Denis Martin on 27/12/2016.
 //
@@ -10,6 +10,7 @@ import SwiftyJSON
 import CoreData
 
 internal let isoDateFormatter = DateFormatter()
+internal let headerDateFormatter = DateFormatter()
 
 internal extension ManagedObjectServerMaping where Self: Entity {
     
@@ -129,16 +130,14 @@ internal extension ManagedObjectServerMaping where Self: Entity {
         /// Need to be implemented in Feather
         let headers: HTTPHeaders = [:]
         
-        // Modified To
-        if let modifiedTo = to {
-//            headers["X-Modified-To"] = String( Int(modifiedTo) )
-            urlWithParam += "&end=\(String( Int(modifiedTo) ))"
-        }
-        
         // Modified From
         if let modifiedFrom = from {
-//            headers["X-Modified-From"] = String(Int(modifiedFrom) )
             urlWithParam += "&start=\(String( Int(modifiedFrom) ))"
+        }
+        
+        // Modified To
+        if let modifiedTo = to {
+            urlWithParam += "&end=\(String( Int(modifiedTo) ))"
         }
 
         // Request
@@ -151,12 +150,14 @@ internal extension ManagedObjectServerMaping where Self: Entity {
                 
                 let json = JSON(_json)
                 callback?(json, nil)
+
+                headerDateFormatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
                 
                 // Save last update if any
                 if  let headers      = responseData.response?.allHeaderFields,
-                    let current     = headers["X-Timestamp"] as? String,
-                    let updated     = TimeInterval(current) {
-                    Self.self.setLastUpdated(date: Date(timeIntervalSince1970: updated) )
+                    let current     = headers["Date"] as? String,
+                    let date        = headerDateFormatter.date(from: current) {
+                    Self.self.setLastUpdated(date: date )
                 }
                 
             }

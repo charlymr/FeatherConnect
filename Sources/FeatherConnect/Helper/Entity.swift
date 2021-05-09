@@ -1,5 +1,5 @@
 //
-//  IRLEXEntity.swift
+//  Entity.swift
 //
 //  Created by Denis Martin on 27/12/2016.
 //

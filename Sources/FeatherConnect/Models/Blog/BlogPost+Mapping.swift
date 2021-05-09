@@ -1,5 +1,5 @@
 //
-//  IRLEXNews.swift
+//  News.swift
 //
 //  Created by Denis Martin on 27/12/2016.
 //

@@ -1,5 +1,5 @@
 //
-//  IRLServerCoreDataMapping.swift
+//  ManagedObjectServerMaping.swift
 //
 //  Created by Denis Martin on 14/12/2016.
 //
@@ -46,7 +46,7 @@ public extension ManagedObjectServerMaping where Self: Entity {
     
     static func lastUpdatedUserDefaultIdentfier() -> String? {
         let entityName      = String(describing: Self.self)
-        return "com.irlmobile.IRLServerConnection.\(FeatherModule.main.module).\(entityName).lastUpdated"
+        return "com.feather.FeatherConnect.\(FeatherModule.main.module).\(entityName).lastUpdated"
     }
         
     static func lastUpdated() -> Date? {
@@ -74,7 +74,7 @@ public extension ManagedObjectServerMaping where Self: Entity {
                        completionHandler: ((NSError?, _ asChanges: Bool) -> Void)?) {
         
         guard let base = connection.baseURL else {
-            fatalError("No BaseURL in IRLServerConnection")
+            fatalError("No BaseURL in FeatherConnect")
         }
         
         _updateData(fromSavedUrl: "\(base)/\(route)/\(Self.routeFilteringParameters ?? "")",
@@ -102,7 +102,7 @@ public extension ManagedObjectServerMaping where Self: Entity {
                            completionHandler: ((NSError?) -> Void)?) {
         
         guard let base = connection.baseURL else {
-            fatalError("No BaseURL in IRLServerConnection")
+            fatalError("No BaseURL in FeatherConnect")
         }
         
         _updateData(fromSavedUrl: "\(base)/\(route)/\(identifier)") { (results, error) in

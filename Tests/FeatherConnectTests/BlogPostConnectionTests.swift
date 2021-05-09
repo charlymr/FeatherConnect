@@ -1,5 +1,5 @@
 //
-//  IRLServerIRLEntityConnectionTests.swift
+//  FeatherConnectEntityTests.swift
 //
 //  Created by Denis Martin on 17/08/2017.
 //
@@ -9,9 +9,9 @@ import Foundation
 import XCTest
 import CoreData
 
-@testable import IRLServerConnection
+@testable import FeatherConnect
 
-class BlogPostConnectionTests: IRLServerIRLEntityConnectionTests, IRLEntityTesting {
+class BlogPostConnectionTests: FeatherConnectEntityTests, EntityTesting {
     
     typealias T = BlogPost
     var frc     = NSFetchedResultsController<T>()
@@ -26,13 +26,19 @@ class BlogPostConnectionTests: IRLServerIRLEntityConnectionTests, IRLEntityTesti
         XCTAssertNoThrow(try frc.performFetch())
     }
     
-    func testTruncate() { fireTruncate() }
+    func test0Truncate() {
+        if let storeURL = BlogModule.main.persistentContainer.persistentStoreCoordinator.persistentStores.first?.url {
+            print(storeURL)
+        }
+
+        fireTruncate()
+    }
     
     func test1stFireUpdate() { fireUpdate() }
     
     func test2ndFireUpdate() { fireUpdate(isSecondCall: true) }
     
-    func testFireUpdateImages() {
+    func test3FireUpdateImages() {
         if let storeURL = BlogModule.main.persistentContainer.persistentStoreCoordinator.persistentStores.first?.url {
             print(storeURL)
         }

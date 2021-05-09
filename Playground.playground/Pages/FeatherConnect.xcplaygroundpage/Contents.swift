@@ -2,7 +2,7 @@
 
 import PlaygroundSupport
 import CoreData
-import IRLServerConnection
+import FeatherConnect
 
 /// Update With You server
 BlogModule.host = "http://127.0.0.1:8080"

@@ -1,5 +1,5 @@
 //
-//  IRLServerIRLEntityProtocolConnectionTests.swift
+//  FeatherConnectEntityTests.swift
 //
 //  Created by Denis Martin on 17/08/2017.
 //
@@ -7,9 +7,9 @@
 import XCTest
 import CoreData
 
-@testable import IRLServerConnection
+@testable import FeatherConnect
 
-protocol IRLEntityTesting: NSFetchedResultsControllerDelegate {
+protocol EntityTesting: NSFetchedResultsControllerDelegate {
     
     associatedtype T: Entity
     
@@ -19,7 +19,7 @@ protocol IRLEntityTesting: NSFetchedResultsControllerDelegate {
     
 }
 
-extension IRLEntityTesting where Self: XCTestCase, T: ManagedObjectServerMaping {
+extension EntityTesting where Self: XCTestCase, T: ManagedObjectServerMaping {
     
     func setupFetchController() {
         
@@ -44,7 +44,7 @@ extension IRLEntityTesting where Self: XCTestCase, T: ManagedObjectServerMaping 
     }
     
     func fireTruncate() {
-        
+
         // Remove All elemetns
         XCTAssertNoThrow(try T.truncate(connection: BlogModule.main as! Self.T.FeatherModule))
         
@@ -105,7 +105,7 @@ extension IRLEntityTesting where Self: XCTestCase, T: ManagedObjectServerMaping 
 
 }
 
-class IRLServerIRLEntityConnectionTests: XCTestCase {
+class FeatherConnectEntityTests: XCTestCase {
     
     var frcUpdate: XCTestExpectation?
     

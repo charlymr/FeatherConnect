@@ -1,5 +1,5 @@
 //
-//  IRLServerConnection.swift
+//  FeatherConnect.swift
 //
 //  Created by Denis Martin on 13/12/2016.
 //

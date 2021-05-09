@@ -1,6 +1,6 @@
 //
-//  IRLEXBlogPostWidget.swift
-//  IRLServerConnection
+//  BlogPostWidget.swift
+//  FeatherConnect
 //
 //  Created by Denis Martin on 31/01/2021.
 //

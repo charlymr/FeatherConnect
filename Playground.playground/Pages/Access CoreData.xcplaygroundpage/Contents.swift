@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 
 import CoreData
-import IRLServerConnection
+import FeatherConnect
 
 BlogModule.host = "http://127.0.0.1:8080"
 

@@ -21,20 +21,20 @@
     </entity>
     <entity name="BlogPost" representedClassName="BlogPost" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="content" optional="YES" attributeType="String"/>
-        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="deletedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="excerpt" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="authors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BlogAuthor" inverseName="posts" inverseEntity="BlogAuthor"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BlogCategory" inverseName="posts" inverseEntity="BlogCategory"/>
     </entity>
     <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="deletedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="deletedOnServer" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="String" defaultValueString="ERROR"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="imageKey" optional="YES" attributeType="String"/>
         <attribute name="modified" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <userInfo>
             <entry key="Primary" value="id"/>
         </userInfo>
@@ -43,7 +43,7 @@
         <element name="BlogAuthor" positionX="-76.832275390625" positionY="550.0957336425781" width="128" height="103"/>
         <element name="BlogAuthorLink" positionX="156.8956298828125" positionY="535.4007720947266" width="128" height="103"/>
         <element name="BlogCategory" positionX="-576.8807983398438" positionY="549.7227783203125" width="128" height="118"/>
-        <element name="BlogPost" positionX="-281.7091674804688" positionY="504.791259765625" width="128" height="163"/>
-        <element name="Entity" positionX="-193.81494140625" positionY="178.0205078125" width="128" height="118"/>
+        <element name="BlogPost" positionX="-281.7091674804688" positionY="504.791259765625" width="128" height="118"/>
+        <element name="Entity" positionX="-193.81494140625" positionY="178.0205078125" width="128" height="163"/>
     </elements>
 </model>

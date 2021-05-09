@@ -15,7 +15,7 @@ import Alamofire
      "links": [
          {
              "url": "https://www.test.com",
-             "label": "irlmobile",
+             "label": "feather",
              "id": "84272742-B5EA-41D0-8B1E-4075B8060D7D",
              "priority": 100
          }
