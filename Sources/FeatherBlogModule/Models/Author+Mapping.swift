@@ -28,7 +28,7 @@ extension BlogAuthor: ManagedEntity {
     
     public static let route: String = "authors"
     
-    public static let routeFilteringParameters: String? = "?per=10000"
+    public static let routeFilteringParameters: String? = "?limit=10000"
 
     public static let apiListItemsKey: String? = "items"
 
