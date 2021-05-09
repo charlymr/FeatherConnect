@@ -20,7 +20,7 @@ public protocol ModuleDefinitionProtocol {
     var module: String { get }
     var persistentContainer: NSPersistentContainer { get }
     
-    init(for route: FeatherAPI)
+    init(for route: FeatherAPIProtocol)
     
     /// Optional, Default "Model"
     static var appGroup: String? { get }

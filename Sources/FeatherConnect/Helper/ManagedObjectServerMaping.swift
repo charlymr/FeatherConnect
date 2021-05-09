@@ -33,7 +33,7 @@ public protocol ManagedObjectServerMaping : NSFetchRequestResult {
 
 }
 
-public extension ManagedObjectServerMaping where Self: Entity {
+public extension ManagedObjectServerMaping where Self: ManagedEntityMapped {
 
     // MARK: Primary key definition
     

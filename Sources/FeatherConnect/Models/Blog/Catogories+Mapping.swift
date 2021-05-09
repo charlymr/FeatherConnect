@@ -26,7 +26,7 @@ import Alamofire
  }
  */
 
-extension BlogCategory: ManagedObjectServerMaping {
+extension BlogCategory: ManagedObjectServerMaping, EntityProtocol {
         
     public typealias FeatherModule = BlogModule
     

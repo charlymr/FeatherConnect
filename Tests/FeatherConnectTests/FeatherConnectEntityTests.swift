@@ -19,7 +19,7 @@ protocol EntityTesting: NSFetchedResultsControllerDelegate {
     
 }
 
-extension EntityTesting where Self: XCTestCase, T: ManagedObjectServerMaping {
+extension EntityTesting where Self: XCTestCase, T: ManagedEntityMapped {
     
     func setupFetchController() {
         

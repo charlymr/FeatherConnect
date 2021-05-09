@@ -24,7 +24,7 @@ import Alamofire
  "title": "Exploitants agricoles : montant des indemnités journalières"
  }
  */
-extension BlogPost: ManagedObjectServerMaping {
+extension BlogPost: ManagedObjectServerMaping, EntityProtocol {
     
     public typealias FeatherModule = BlogModule
 

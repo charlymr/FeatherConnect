@@ -12,7 +12,7 @@ import CoreData
 internal let isoDateFormatter = DateFormatter()
 internal let headerDateFormatter = DateFormatter()
 
-internal extension ManagedObjectServerMaping where Self: Entity {
+internal extension ManagedObjectServerMaping where Self: ManagedEntityMapped {
     
     static func setLastUpdated(date: Date) {
         if let lastUpdate = lastUpdatedUserDefaultIdentfier() {
@@ -72,7 +72,7 @@ internal extension ManagedObjectServerMaping where Self: Entity {
         let identifier      = json[primary].stringValue
 
         // if there have any result, we just udpate
-        if let found = _find(identifier: identifier, connection: connection) {
+        if var found = _find(identifier: identifier, connection: connection) {
             
             // If deleted we remove our object from our DB
             if json["deletedAt"].stringValue.count > 1 {
@@ -92,7 +92,7 @@ internal extension ManagedObjectServerMaping where Self: Entity {
         else if  json["deletedAt"].stringValue.count == 0 {
             
             let entityName      = String(describing: Self.self)
-            guard let entity = NSEntityDescription.insertNewObject(forEntityName: entityName, into: connection.managedObjectContext) as? Self else {
+            guard var entity = NSEntityDescription.insertNewObject(forEntityName: entityName, into: connection.managedObjectContext) as? Self else {
                 return nil
             }
             entity.mapParent(json)
@@ -172,13 +172,14 @@ internal extension ManagedObjectServerMaping where Self: Entity {
             return
         }
         
+        var muttatingSelf = self
         URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) in
             guard error == nil else {
                 callback?(nil, error! as NSError)
                 return
             }
             if let data = data, data.count > 5126 {
-                self.imageData = data
+                muttatingSelf.imageData = data
                 callback?(data, nil)
             } else {
                 callback?(nil, NSError.init(domain: "Did not get proper data. No data and No error. This should not happen!", code: 500, userInfo: nil))
