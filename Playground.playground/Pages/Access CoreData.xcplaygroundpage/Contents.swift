@@ -1,12 +1,13 @@
 //: [Previous](@previous)
 
-import CoreData
-import FeatherConnect
+import PlaygroundSupport
+import FeatherBlogModule
 
 BlogModule.host = "http://127.0.0.1:8080"
 
-let fetchRequest: NSFetchRequest<BlogPost> = BlogPost.fetchRequest()
+PlaygroundPage.current.needsIndefiniteExecution = true
 
+let fetchRequest: NSFetchRequest<BlogPost> = BlogPost.fetchRequest()
 let fetchedResults = try? BlogModule.main.persistentContainer.viewContext.fetch(fetchRequest)
 print(fetchedResults?.count ?? 0)
 
@@ -16,6 +17,7 @@ BlogPost.update {  (_, _) in
     for result in fetchedResults ?? [] {
         print(result.debugDescription)
     }
+    PlaygroundPage.current.finishExecution()
 }
 
 //: [Next](@next)

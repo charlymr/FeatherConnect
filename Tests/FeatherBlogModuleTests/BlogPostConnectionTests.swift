@@ -8,7 +8,9 @@ import Foundation
 
 import XCTest
 import CoreData
+import FeatherConnect
 
+@testable import FeatherBlogModule
 @testable import FeatherConnect
 
 class BlogPostConnectionTests: FeatherConnectEntityTests, EntityTesting {

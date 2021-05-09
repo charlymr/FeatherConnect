@@ -8,10 +8,11 @@ import XCTest
 import CoreData
 
 @testable import FeatherConnect
+@testable import FeatherBlogModule
 
-protocol EntityTesting: NSFetchedResultsControllerDelegate {
+public protocol EntityTesting: NSFetchedResultsControllerDelegate {
     
-    associatedtype T: Entity
+    associatedtype T: ManagedEntity
     
     var frc: NSFetchedResultsController<T> { get set }
     
@@ -19,7 +20,7 @@ protocol EntityTesting: NSFetchedResultsControllerDelegate {
     
 }
 
-extension EntityTesting where Self: XCTestCase, T: ManagedEntityMapped {
+public extension EntityTesting where Self: XCTestCase, T: ManagedEntityMapped {
     
     func setupFetchController() {
         
@@ -105,11 +106,11 @@ extension EntityTesting where Self: XCTestCase, T: ManagedEntityMapped {
 
 }
 
-class FeatherConnectEntityTests: XCTestCase {
+public class FeatherConnectEntityTests: XCTestCase {
     
     var frcUpdate: XCTestExpectation?
     
-    override func tearDown() {
+    public override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }

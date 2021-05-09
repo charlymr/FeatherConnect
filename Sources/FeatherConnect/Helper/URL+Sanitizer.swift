@@ -5,8 +5,6 @@
 //  Created by Denis Martin on 27/04/2021.
 //
 
-import Foundation
-
 public extension URL {
 
     static func sanatizedImageURL(from imageURL: String?) -> URL? {

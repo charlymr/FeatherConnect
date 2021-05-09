@@ -4,10 +4,6 @@
 //  Created by Denis Martin on 27/12/2016.
 //
 
-import SwiftyJSON
-import CoreData
-import Alamofire
-
 /*
  {
  "excerpt": "Les montants des indemnités journalières dues aux exploitants en cas d'arrêt de travail sont revalorisés à compter du 1 avril 2021.",

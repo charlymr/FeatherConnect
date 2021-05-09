@@ -5,17 +5,12 @@
 //  Created by Denis Martin on 29/04/2021.
 //
 
-import Foundation
-import CoreData
-
 #if os(iOS)
-import UIKit
-
 /// For the Widget to work, you will need AppGroup to be setup!
 
 public protocol ModuleWidgetDataProtocol {
     associatedtype Module               = ModuleDefinitionProtocol
-    associatedtype EntityType           = Entity & ManagedObjectServerMaping
+    associatedtype EntityType           = ManagedEntity & ManagedObjectServerMaping
 
     static func from(blogPost: EntityType) -> Self
     static var placeholder: Self { get }
@@ -29,7 +24,7 @@ public protocol ModuleWidgetDataProtocol {
 }
 
 
-public class WidgetFetcher<WidgetResultType, ManagedObjectType: Entity> : NSObject, NSFetchedResultsControllerDelegate
+open class WidgetFetcher<WidgetResultType, ManagedObjectType: ManagedEntity> : NSObject, NSFetchedResultsControllerDelegate
 where WidgetResultType : ModuleWidgetDataProtocol  {
         
     public var fetcher: NSFetchedResultsController <ManagedObjectType>

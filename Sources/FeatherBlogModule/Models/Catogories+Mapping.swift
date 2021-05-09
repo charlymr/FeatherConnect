@@ -5,10 +5,6 @@
 //  Created by Denis Martin on 27/04/2021.
 //
 
-import SwiftyJSON
-import CoreData
-import Alamofire
-
 /*
  {
      "bio": "<p>Denis</p>\r\n",

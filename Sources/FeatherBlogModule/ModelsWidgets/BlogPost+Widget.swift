@@ -5,12 +5,7 @@
 //  Created by Denis Martin on 31/01/2021.
 //
 
-import Foundation
-import CoreData
-
 #if os(iOS)
-import UIKit
-
 /// For the Widget to work, you will need AppGroup to be setup!
 public struct BlogPostWidgetData: ModuleWidgetDataProtocol, Codable {
     public typealias Module             = BlogModule

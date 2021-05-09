@@ -4,11 +4,6 @@
 //  Created by Denis Martin on 27/12/2016.
 //
 
-import Foundation
-import Alamofire
-import SwiftyJSON
-import CoreData
-
 internal let isoDateFormatter = DateFormatter()
 internal let headerDateFormatter = DateFormatter()
 

@@ -5,10 +5,7 @@
 //  Created by Denis Martin on 28/04/2021.
 //
 
-import Foundation
-import CoreData
-
-public class Module {
+open class Module {
         
     public static var host: String?     = nil
     public static var appGroup: String? = nil

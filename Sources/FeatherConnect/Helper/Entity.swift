@@ -4,11 +4,6 @@
 //  Created by Denis Martin on 27/12/2016.
 //
 
-import Foundation
-
-import SwiftyJSON
-import CoreData
-
 public typealias ManagedEntity =  EntityProtocol & ManagedObjectServerMaping
 
 public protocol EntityProtocol {

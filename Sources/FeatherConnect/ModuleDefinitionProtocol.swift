@@ -4,12 +4,17 @@
 //  Created by Denis Martin on 13/12/2016.
 //
 
-import Foundation
-import Alamofire
-import CoreData
+public protocol FeatherAPIProtocol {
+    var rawValue: String { get }
+    var module: String { get }
+}
 
 public protocol ModuleDefinitionProtocol {
     
+    associatedtype API = FeatherAPIProtocol
+    
+    init(for route: API)
+
     /// Required: for the module to work.
     /// If you subclass `Module`, most of it will be handle
     
@@ -19,9 +24,7 @@ public protocol ModuleDefinitionProtocol {
     var apiPath: String { get }
     var module: String { get }
     var persistentContainer: NSPersistentContainer { get }
-    
-    init(for route: FeatherAPIProtocol)
-    
+        
     /// Optional, Default "Model"
     static var appGroup: String? { get }
     var baseURL: String? { get }
@@ -66,14 +69,14 @@ public extension ModuleDefinitionProtocol  {
     
     // MARK: iOS 10+
     
-    static func persistentContainer(forResource module: String, name: String = "Model", reset: Bool = false) -> NSPersistentContainer {
+    static func persistentContainer(forResource module: String, bundle: Bundle, name: String = "Model", reset: Bool = false) -> NSPersistentContainer {
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
          */
-        guard let modelURL = Bundle.module.url(forResource: module, withExtension: "momd") else { fatalError() }
+        guard let modelURL = bundle.url(forResource: module, withExtension: "momd") else { fatalError() }
         guard let model = NSManagedObjectModel(contentsOf: modelURL) else { fatalError() }
         
         let container = NSPersistentContainer(name: name, managedObjectModel: model )

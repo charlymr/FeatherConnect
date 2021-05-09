@@ -1,8 +1,7 @@
 //: [Previous](@previous)
 
 import PlaygroundSupport
-import CoreData
-import FeatherConnect
+import FeatherBlogModule
 
 /// Update With You server
 BlogModule.host = "http://127.0.0.1:8080"

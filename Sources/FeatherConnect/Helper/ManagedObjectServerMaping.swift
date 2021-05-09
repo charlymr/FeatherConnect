@@ -4,11 +4,6 @@
 //  Created by Denis Martin on 14/12/2016.
 //
 
-import Foundation
-import Alamofire
-import SwiftyJSON
-import CoreData
-
 public typealias ManagedEntityMapped = NSManagedObject & EntityProtocol & ManagedObjectServerMaping
 
 public protocol ManagedObjectServerMaping : NSFetchRequestResult {

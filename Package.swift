@@ -13,6 +13,9 @@ let package = Package(
         .library(
             name: "FeatherConnect",
             targets: ["FeatherConnect"]),
+        .library(
+            name: "FeatherBlogModule",
+            targets: ["FeatherBlogModule"]),
     ],
     dependencies: [
          .package(url: "https://github.com/Alamofire/Alamofire", from: "5.4.3"),
@@ -26,8 +29,15 @@ let package = Package(
                 .product(name: "Alamofire", package: "Alamofire"),
                 .product(name: "SwiftyJSON", package: "SwiftyJSON")
             ]),
+
+        .target(
+            name: "FeatherBlogModule",
+            dependencies: [
+                /// Mapper
+                .target(name: "FeatherConnect"),
+            ]),
         .testTarget(
-            name: "FeatherConnectTests",
-            dependencies: ["FeatherConnect"]),
+            name: "FeatherBlogModuleTests",
+            dependencies: [ "FeatherBlogModule" ]),
     ]
 )
