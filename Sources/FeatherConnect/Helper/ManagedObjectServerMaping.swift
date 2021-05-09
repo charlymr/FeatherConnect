@@ -9,6 +9,8 @@ import Alamofire
 import SwiftyJSON
 import CoreData
 
+public typealias ManagedEntityMapped = NSManagedObject & EntityProtocol & ManagedObjectServerMaping
+
 public protocol ManagedObjectServerMaping : NSFetchRequestResult {
 
     // MARK: Required

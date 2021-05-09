@@ -9,7 +9,7 @@ import Foundation
 import SwiftyJSON
 import CoreData
 
-public typealias ManagedEntityMapped = NSManagedObject & EntityProtocol & ManagedObjectServerMaping
+public typealias ManagedEntity =  EntityProtocol & ManagedObjectServerMaping
 
 public protocol EntityProtocol {
     var id: String? { get set }
