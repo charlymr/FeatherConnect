@@ -37,16 +37,3 @@ extension BlogCategory: ManagedObjectServerMaping {
     public static let apiListItemsKey: String? = "items"
 
 }
-
-#if os(iOS)
-extension BlogCategory: ImageCaching {
-    
-    public var imageURL: String? {
-        guard let imageKey = imageKey else {
-            return nil
-        }
-        return FeatherModule.main.host + "/assets/" + imageKey
-    }
-
-}
-#endif

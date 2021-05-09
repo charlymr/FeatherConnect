@@ -102,7 +102,7 @@ extension IRLEntityTesting where Self: XCTestCase, T: ManagedObjectServerMaping 
         }
         
     }
-    
+
 }
 
 class IRLServerIRLEntityConnectionTests: XCTestCase {

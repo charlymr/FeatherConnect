@@ -8,7 +8,7 @@
 import Foundation
 
 public enum FeatherAPI : String {
-    case blog = "api/admin/blog"
+    case blog = "api/blog"
     var module: String {
         switch self {
         case .blog: return "Blog"

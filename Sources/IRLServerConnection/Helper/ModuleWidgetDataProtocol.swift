@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+
 #if os(iOS)
 import UIKit
 
@@ -22,7 +23,7 @@ public protocol ModuleWidgetDataProtocol {
     var objecId: String { get }
     var title: String { get }
     var subtitle: String { get }
-    var imageURL: String? { get }
+    var image: Data? { get }
     var date_modified: Date { get }
 
 }

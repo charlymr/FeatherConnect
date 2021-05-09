@@ -14,9 +14,9 @@ import Alamofire
  "imageKey": "uploads/v1/k4_17361511.jpg",
  "push_done": "Non",
  "content": "<h2><strong>Exploitants",
- "created_at": "2021-04-20T12:00:00Z",
+ "createdAt": "2021-04-20T12:00:00Z",
  "id": "BB386A7D-8B7E-4139-9D53-0345FF098974",
- "updated_at": "2021-04-27T16:29:32Z",
+ "updatedAt": "2021-04-27T16:29:32Z",
  "push": false,
  "authors": [],
  "categories": [],
@@ -30,7 +30,7 @@ extension BlogPost: ManagedObjectServerMaping {
 
     public static let route: String = "posts"
     
-    public static let routeFilteringParameters: String? = "?per=10000"
+    public static let routeFilteringParameters: String? = "?limit=10000"
     
     public static let apiListItemsKey: String? = "items"
     
@@ -50,15 +50,6 @@ extension BlogPost: ManagedObjectServerMaping {
 
 }
 
-#if os(iOS)
-extension BlogPost: ImageCaching {
-
-    public var imageURL: String? {
-        guard let imageKey = imageKey else {
-            return nil
-        }
-        return FeatherModule.main.host + "/assets/" + imageKey
-    }
+extension BlogPost {
 
 }
-#endif

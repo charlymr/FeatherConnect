@@ -74,7 +74,7 @@ internal extension ManagedObjectServerMaping where Self: Entity {
         if let found = _find(identifier: identifier, connection: connection) {
             
             // If deleted we remove our object from our DB
-            if json["deleted_at"].stringValue.count > 1 {
+            if json["deletedAt"].stringValue.count > 1 {
                 connection.managedObjectContext.delete(found)
             }
             // Map contect
@@ -88,7 +88,7 @@ internal extension ManagedObjectServerMaping where Self: Entity {
         }
         
         // else, we create it like this (If not a deleted one)
-        else if  json["deleted_at"].stringValue.count == 0 {
+        else if  json["deletedAt"].stringValue.count == 0 {
             
             let entityName      = String(describing: Self.self)
             guard let entity = NSEntityDescription.insertNewObject(forEntityName: entityName, into: connection.managedObjectContext) as? Self else {
@@ -162,6 +162,28 @@ internal extension ManagedObjectServerMaping where Self: Entity {
             }
         }
         
+    }
+    
+    func _getImageData(callback: ((Data?, NSError?) -> Void)?) {
+        
+        guard let url = self.imageURL else {
+            callback?(nil, NSError.init(domain: "Failed to imageURL(From \(imageURL?.absoluteString ?? "Is Empty"))", code: 500, userInfo: nil))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) in
+            guard error == nil else {
+                callback?(nil, error! as NSError)
+                return
+            }
+            if let data = data, data.count > 5126 {
+                self.imageData = data
+                callback?(data, nil)
+            } else {
+                callback?(nil, NSError.init(domain: "Did not get proper data. No data and No error. This should not happen!", code: 500, userInfo: nil))
+            }
+        }).resume()
+
     }
     
     func _autoMapContent(_ json: JSON) {

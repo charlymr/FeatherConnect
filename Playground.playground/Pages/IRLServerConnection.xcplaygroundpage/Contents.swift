@@ -11,7 +11,7 @@ BlogModule.host = "http://127.0.0.1:8080"
 //BlogModule.resetDataStore = true
 //try! BlogPost.truncate(connection: BlogModule.main)
 
-
+print(NSHomeDirectory())
 URLCache.shared = URLCache(memoryCapacity: 0, diskCapacity: 0, diskPath: nil)
 
 // Load our stuffs
@@ -36,6 +36,9 @@ BlogPost.update {  (error, hasUpdate) in
     print(fetchedResults.count)
     for result in fetchedResults {
         if let postID = result.id {
+            result.getImage { data, error in
+                print("Fetched image for \(postID) - \(data?.description ?? "No Data")")
+            }
             BlogPost.updateWith(identifier: postID) { (_) in
                 print("Fetch: " + postID)
 
@@ -51,7 +54,7 @@ BlogPost.update {  (error, hasUpdate) in
     }
 }
 
-DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(3)) {
+DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(10)) {
     let fetchRequest: NSFetchRequest<BlogPost> = BlogPost.fetchRequest()
     let fetchedResults = try? BlogModule.main.persistentContainer.viewContext.fetch(fetchRequest)
     print(fetchedResults?.count ?? 0)
@@ -77,6 +80,7 @@ DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(3)) {
         }
     }
 
+    BlogModule.main.saveContext()
     PlaygroundPage.current.finishExecution()
 
 }

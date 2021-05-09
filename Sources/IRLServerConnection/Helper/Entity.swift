@@ -15,7 +15,8 @@ extension  Entity {
     
     internal func mapParent(_ json: JSON) {
         id              = json["id"].stringValue
-        deletedOnServer = json["deleted_at"].stringValue.isEmpty ? false : true
+        deletedOnServer = json["deletedAt"].stringValue.isEmpty ? false : true
+        imageKey        = json["imageKey"].stringValue
     }
     
     public var objecId: String {
@@ -23,3 +24,29 @@ extension  Entity {
     }
 
 }
+
+#if os(iOS)
+import UIKit
+
+extension Entity {
+    public var image: UIImage? {
+        guard let data = imageData else {
+            return nil
+        }
+        return UIImage(data: data)
+    }
+}
+#endif
+
+#if os(macOS)
+import Cocoa
+
+extension Entity {
+    public var image: CIImage? {
+        guard let data = imageData else {
+            return nil
+        }
+        return CIImage(data: data)
+    }
+}
+#endif

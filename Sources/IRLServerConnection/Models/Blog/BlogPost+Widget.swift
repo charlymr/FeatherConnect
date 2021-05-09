@@ -7,12 +7,12 @@
 
 import Foundation
 import CoreData
+
 #if os(iOS)
 import UIKit
 
 /// For the Widget to work, you will need AppGroup to be setup!
-
-public struct BlogPostWidgetData: ModuleWidgetDataProtocol, ImageCaching, Codable {
+public struct BlogPostWidgetData: ModuleWidgetDataProtocol, Codable {
     public typealias Module             = BlogModule
     public typealias EntityType         = BlogPost
     public typealias Category           = BlogCategory
@@ -20,16 +20,16 @@ public struct BlogPostWidgetData: ModuleWidgetDataProtocol, ImageCaching, Codabl
     public var objecId: String
     public var title: String
     public var subtitle: String
-    public var imageURL: String?
+    public var image: Data?
     public var date_modified: Date
 
     public static let moduleName = "Blog"
 
     static public var placeholder: BlogPostWidgetData {
         let data = BlogPostWidgetData(objecId: "0",
-                                       title: "Les Posts",
-                                       subtitle: "Toutes les posts dans votre widget sur votre écran!",
-                                       imageURL: nil,
+                                       title: "Posts",
+                                       subtitle: "All Posts on your screen",
+                                       image: nil,
                                        date_modified: Date())
         return data
     }
@@ -38,9 +38,8 @@ public struct BlogPostWidgetData: ModuleWidgetDataProtocol, ImageCaching, Codabl
         let data = BlogPostWidgetData(objecId: blogPost.id ?? "ERROR",
                                        title: blogPost.title ?? placeholder.title,
                                        subtitle: blogPost.excerpt ?? placeholder.subtitle,
-                                       imageURL: blogPost.imageURL,
-                                       date_modified: blogPost.updated_at ?? placeholder.date_modified)
-        data.cacheImage()
+                                       image: blogPost.imageData,
+                                       date_modified: blogPost.updatedAt ?? placeholder.date_modified)
         return data
     }
         
@@ -57,7 +56,7 @@ public class BlogPostFetcher: WidgetFetcher<BlogPostWidgetData, BlogPostWidgetDa
 
     // MARK: Fetch Controller
         
-    static let sortDescriptors = [ NSSortDescriptor.init(key: "created_at", ascending: false) ]
+    static let sortDescriptors = [ NSSortDescriptor.init(key: "createdAt", ascending: false) ]
 
     // MARK: Ovveriding Filtering Logic
     
@@ -81,7 +80,7 @@ public class BlogPostFetcher: WidgetFetcher<BlogPostWidgetData, BlogPostWidgetDa
     
     // MARK: Categories Logic
     
-    private var selectedCategory: String = "Toutes" {
+    private var selectedCategory: String = "All" {
         didSet {
             fetcher = Self.fetcherFor(category: selectedCategory)
             fetcher.delegate = self

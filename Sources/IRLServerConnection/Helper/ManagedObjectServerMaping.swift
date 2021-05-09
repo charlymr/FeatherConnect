@@ -57,6 +57,13 @@ public extension ManagedObjectServerMaping where Self: Entity {
         return nil
     }
     
+    var imageURL: URL? {
+        guard let imageKey = imageKey else {
+            return nil
+        }
+        return URL(string: FeatherModule.main.host + "/assets/" + imageKey)
+    }
+
     // MARK: Work with Data
     
     static func truncate(connection: FeatherModule) throws {
@@ -122,6 +129,10 @@ public extension ManagedObjectServerMaping where Self: Entity {
                 }
             }
         }
+    }
+
+    func getImage(callback: ((Data?, NSError?) -> Void)?) {
+        _getImageData(callback: callback)
     }
     
     // MARK: Optional Perform Personalisation
