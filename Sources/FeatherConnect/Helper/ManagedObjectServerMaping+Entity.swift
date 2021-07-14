@@ -225,8 +225,11 @@ internal extension ManagedObjectServerMaping where Self: ManagedEntityMapped {
                 
             case  .dateAttributeType:
                 setValue( isoDateFormatter.date(from: json[name].string ?? ""), forKey: name)
-                
-            default:
+             
+            case  .transformableAttributeType:
+                setValue( json[name].dictionary, forKey: name)                
+
+                default:
                 break
             }
         }
